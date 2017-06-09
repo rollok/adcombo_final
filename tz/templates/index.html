@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block body %}
+  <h2>Database adress</h2>
+  {% if error %}<p class="error"><strong>Error:</strong> {{ error }}{% endif %}
+  <form action="{{ url_for('tz.index') }}" method="post">
+    <dl>
+      <dt>Input database URL: <input type="text" size="37" name="db_1" value="{{session.db_url}}">
+    </dl>
+  </form>
+
+  <table>
+  <!-- table header -->
+  {% if table_indexes %}
+  <tr>
+     {% for key in table_indexes[0] %}
+     <th> Databases </th>
+     {% endfor %}
+  </tr>
+  {% endif %}
+
+  <!-- table rows -->
+  {% for dict_item in table_indexes %}
+  <tr>
+     {% for value in dict_item.values() %}
+     <td>
+         
+         {{ value }} |
+         <a href="{{ url_for('tz.table_info', table_name=value) }}">info</a> |
+         <a href="{{ url_for('tz.table_indexes', table_name=value) }}">indexes</a> |
+         <a href="{{ url_for('tz.table_constraint', table_name=value) }}">constraints</a> |
+         <a href="{{ url_for('tz.table_relations', table_name=value) }}">relations</a> |
+         
+     </td>
+
+     {% endfor %}
+  </tr>
+  {% endfor %}
+
+  <a href="{{ url_for('tz.db_funcs_info') }}">
+  Functions in Databases
+  </a>
+      
+{% endblock %}

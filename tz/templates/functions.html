@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block body %}
+  <table>
+  Functions in Databases:
+  {% if rows %}
+  
+  <br>
+  </br>
+
+  <tr>
+     {% for key in rows[0] %}
+     <th> 
+     </th>
+     {% endfor %}
+  </tr>
+  {% endif %}
+
+  <!-- table rows -->
+  {% for dict_item in rows %}
+  <tr>
+     {% for value in dict_item.values() %}
+     <td> {{ value }} </td>
+     {% endfor %}
+  </tr>
+  {% endfor %}
+{% endblock %}
